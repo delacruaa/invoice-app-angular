@@ -15,8 +15,8 @@ import { SidebarService } from 'src/app/services/sidebar.service';
 export class AddInvoiceComponent implements OnInit {
   formGroup!:FormGroup
   submitted = false;
-  selects= ['Net 1 day','Net 7 days','Net 14 days','Net 30 days']
-  currentSelect='Net 1 day'
+  selects= ['Net 1 days','Net 7 days','Net 14 days','Net 30 days']
+  currentSelect='Net 1 days'
   isSelectOpen=false
   isDatePickerOpen=false
   currentMonth =  this.datePipe.transform(new Date(), 'd MMM yyyy');

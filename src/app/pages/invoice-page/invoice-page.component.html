@@ -3,7 +3,7 @@
     <div class="error"  *ngIf="error">
         Something get wrong... try later
     </div>
-    <div class="invoice__wrapper"  > 
+    <div class="invoice__wrapper" *ngIf="!loading && !error"  > 
         <button class="btn" [routerLink]="'/'">
             <img src="/assets/icon-arrow.svg" alt="arrow" class="arrow" />
             Go back
@@ -93,11 +93,11 @@
     
 </div>
 <div class="button__wrapper__mobile" >
-    <app-button  [buttonClass]="'black__white'" (click)="openSidebar()" >Edit</app-button>
+    <app-button  [buttonClass]="'black__white'" (click)="openSidebar()" *ngIf="invoice.id">Edit</app-button>
     <app-button  [buttonClass]="'red'" (click)="deleteInvoice(invoice.id)" >Delete</app-button>
     <app-button (click)="markAsPaid(invoice.id)" *ngIf="invoice.status=='pending'" [buttonClass]="'primary'">Mark as Paid</app-button>
 </div>
 
 <app-sidebar   [isOpenSidebar]="isOpenSidebar" [sidebarName]="'editInvoice'">
-    <app-edit-invoice></app-edit-invoice>
+    <app-edit-invoice *ngIf="!loading && !error && invoice.id"></app-edit-invoice>
 </app-sidebar>

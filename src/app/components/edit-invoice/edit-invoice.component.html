@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="invoice.id" >
     <h1>Edit Invoice</h1>  
     <form [formGroup] = "formGroup"  (ngSubmit)="submitForm()" >
         <p class="form__name">Bill From</p>

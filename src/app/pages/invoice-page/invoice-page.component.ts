@@ -24,6 +24,9 @@ export class InvoicePageComponent implements OnInit {
     private router: Router,
     private _toastService: ToastService) {}
   ngOnInit(): void {
+    this.sidebarService.editInvoice.subscribe(sidebar=> {
+      this.isOpenSidebar=sidebar
+    })
     this.loading=true
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -32,6 +35,7 @@ export class InvoicePageComponent implements OnInit {
         console.log(id)
         data.forEach(item=> {
           if(item.id ==id) {
+            console.log(item.id)
             this.invoice=item
             this.invoiceService.invoiceItem.next(item)
           }
@@ -42,9 +46,7 @@ export class InvoicePageComponent implements OnInit {
         this.error=true
       })
     });
-    this.sidebarService.editInvoice.subscribe(sidebar=> {
-      this.isOpenSidebar=sidebar
-    })
+   
   }
   markAsPaid(id:string) {
     this.invoiceService.markAsPaid(id)

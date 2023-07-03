@@ -24,7 +24,8 @@ export class EditInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.invoiceServie.getInvoiceItem().subscribe(data=> {
       this.invoice = data
-      this.currentSelect = `Net ${data.paymentTerms} days `
+      this.currentSelect = `Net ${data.paymentTerms} days`
+      
       this.currentMonth = this.datePipe.transform(new Date(data.createdAt), 'd MMM yyyy')!; 
       let itemList = data.items.map(item=> {
         return new FormGroup({
@@ -137,7 +138,7 @@ export class EditInvoiceComponent implements OnInit {
         //@ts-ignore
       let items = this.formGroup.value.itemList.map((item,index)=> {
         return {
-          name: item.name,
+          name: item.name.trim(),
           quantity: item.quantity,
           price: item.price,
           total: (item.price *item.quantity)
@@ -148,22 +149,22 @@ export class EditInvoiceComponent implements OnInit {
         id: this.invoice.id,
         createdAt: this.invoice.createdAt,
         paymentDue: this.getPaymentDue(this.currentMonth!),
-        description: this.formGroup.value.projectDescription,
+        description: this.formGroup.value.projectDescription.trim(),
         paymentTerms: this.extractDigitsFromString(this.currentSelect),
-        clientName: this.formGroup.value.clientName,
-        clientEmail: this.formGroup.value.clientEmail,
+        clientName: this.formGroup.value.clientName.trim(),
+        clientEmail: this.formGroup.value.clientEmail.trim(),
         status: this.invoice.status,
         senderAddress: {
-            street: this.formGroup.value.toStreetAddress,
-            city: this.formGroup.value.toCity,
-            postCode: this.formGroup.value.toPostCode,
-            country: this.formGroup.value.toCountry,
+            street: this.formGroup.value.toStreetAddress.trim(),
+            city: this.formGroup.value.toCity.trim(),
+            postCode: this.formGroup.value.toPostCode.trim(),
+            country: this.formGroup.value.toCountry.trim(),
         },
         clientAddress: {
-          street: this.formGroup.value.fromStreetAddress,
-          city: this.formGroup.value.fromCity,
-          postCode: this.formGroup.value.fromPostCode,
-          country: this.formGroup.value.fromCountry,
+          street: this.formGroup.value.fromStreetAddress.trim(),
+          city: this.formGroup.value.fromCity.trim(),
+          postCode: this.formGroup.value.fromPostCode.trim(),
+          country: this.formGroup.value.fromCountry.trim(),
         },
         items: items,
         //@ts-ignore
