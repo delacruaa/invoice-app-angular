@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { InvoiceInterface } from '../models/InvoiceInterface';
-import { catchError, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, throwError } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
   constructor(private db: AngularFireDatabase) {}
+  invoiceList = new BehaviorSubject<InvoiceInterface[]>([])
   getInvoiceList() {
     return  this.db.list<InvoiceInterface>('/').valueChanges().pipe(
       catchError(error => {
@@ -14,6 +15,9 @@ export class InvoiceService {
         return throwError('Something went wrong');
       })
     )
+  }
+  getInvoice() {
+    return this.invoiceList.asObservable()
   }
   markAsPaid(id:string) {
     return this.db.object(`${id}`).update({

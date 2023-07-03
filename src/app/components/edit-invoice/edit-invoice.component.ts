@@ -12,7 +12,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./edit-invoice.component.scss']
 })
 export class EditInvoiceComponent implements OnInit {
-  @Input() invoice!:InvoiceInterface
+  @Input() invoice:InvoiceInterface = {} as InvoiceInterface
   formGroup!:FormGroup
   submitted = false;
   selects= ['Net 1 days','Net 7 days','Net 14 days','Net 30 days']
