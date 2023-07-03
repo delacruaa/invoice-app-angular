@@ -118,7 +118,8 @@ export class AddInvoiceComponent implements OnInit {
     return this.convertDateFormat(result)
   }
   convertDateFormat(dateStr:string) {
-    const dateParts = dateStr.split(' ');
+    let newDate =  this.datePipe.transform(new Date(dateStr), 'dd MMM yyyy');
+    const dateParts = newDate!.split(' ');
     const months = {
       Jan: '01',
       Feb: '02',
