@@ -1,4 +1,8 @@
 <div class="container">
+    <app-spinner *ngIf="loading"></app-spinner>
+    <div class="error"  *ngIf="error">
+        Something get wrong... try later
+    </div>
     <div class="invoice__wrapper"  > 
         <button class="btn" [routerLink]="'/'">
             <img src="/assets/icon-arrow.svg" alt="arrow" class="arrow" />
@@ -95,5 +99,5 @@
 </div>
 
 <app-sidebar   [isOpenSidebar]="isOpenSidebar" [sidebarName]="'editInvoice'">
-    <app-edit-invoice  [invoice]="invoice"></app-edit-invoice>
+    <app-edit-invoice></app-edit-invoice>
 </app-sidebar>

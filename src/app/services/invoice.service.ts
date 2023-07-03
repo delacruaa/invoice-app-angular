@@ -7,7 +7,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 })
 export class InvoiceService {
   constructor(private db: AngularFireDatabase) {}
-  invoiceList = new BehaviorSubject<InvoiceInterface[]>([])
+  invoiceItem = new BehaviorSubject<InvoiceInterface>({} as InvoiceInterface)
   getInvoiceList() {
     return  this.db.list<InvoiceInterface>('/').valueChanges().pipe(
       catchError(error => {
@@ -16,8 +16,8 @@ export class InvoiceService {
       })
     )
   }
-  getInvoice() {
-    return this.invoiceList.asObservable()
+  getInvoiceItem() {
+    return this.invoiceItem.asObservable()
   }
   markAsPaid(id:string) {
     return this.db.object(`${id}`).update({

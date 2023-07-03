@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { InvoiceInterface } from 'src/app/models/InvoiceInterface';
 import { InvoiceService } from 'src/app/services/invoice.service';
@@ -12,37 +13,40 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./edit-invoice.component.scss']
 })
 export class EditInvoiceComponent implements OnInit {
-  @Input() invoice:InvoiceInterface = {} as InvoiceInterface
+  invoice:InvoiceInterface = {} as InvoiceInterface
   formGroup!:FormGroup
   submitted = false;
   selects= ['Net 1 days','Net 7 days','Net 14 days','Net 30 days']
   currentSelect!:string
   isSelectOpen=false
   currentMonth!:string;
-  constructor(private datePipe: DatePipe, private invoiceServie: InvoiceService,private _toastService: ToastService, private sidebarService:SidebarService) { }
+  constructor(private datePipe: DatePipe, private invoiceServie: InvoiceService,private _toastService: ToastService, private sidebarService:SidebarService,  private route: ActivatedRoute, ) { }
   ngOnInit(): void {
-    this.currentSelect = `Net ${this.invoice.paymentTerms} days `
-    this.currentMonth = this.datePipe.transform(new Date(this.invoice.createdAt), 'd MMM yyyy')!; 
-    let itemList = this.invoice.items.map(item=> {
-      return new FormGroup({
-        name:new FormControl(item.name, [Validators.required]),
-        quantity:new FormControl(item.quantity, [Validators.required]),
-        price:new FormControl(item.price, [Validators.required]),
+    this.invoiceServie.getInvoiceItem().subscribe(data=> {
+      this.invoice = data
+      this.currentSelect = `Net ${data.paymentTerms} days `
+      this.currentMonth = this.datePipe.transform(new Date(data.createdAt), 'd MMM yyyy')!; 
+      let itemList = data.items.map(item=> {
+        return new FormGroup({
+          name:new FormControl(item.name, [Validators.required]),
+          quantity:new FormControl(item.quantity, [Validators.required]),
+          price:new FormControl(item.price, [Validators.required]),
+        })
       })
-    })
-    this.formGroup = new FormGroup({
-      fromStreetAddress:new FormControl(this.invoice.clientAddress.street, [Validators.required]),
-      fromCity:new FormControl(this.invoice.clientAddress.city, [Validators.required]),
-      fromPostCode:new FormControl(this.invoice.clientAddress.postCode, [Validators.required]),
-      fromCountry:new FormControl(this.invoice.clientAddress.country, [Validators.required]),
-      clientName:new FormControl(this.invoice.clientName, [Validators.required]),
-      clientEmail:new FormControl(this.invoice.clientEmail, [Validators.required, Validators.email]),
-      toStreetAddress:new FormControl(this.invoice.senderAddress.street, [Validators.required]),
-      toCity:new FormControl(this.invoice.senderAddress.city, [Validators.required]),
-      toPostCode:new FormControl(this.invoice.senderAddress.postCode, [Validators.required]),
-      toCountry:new FormControl(this.invoice.senderAddress.country, [Validators.required]),
-      projectDescription:new FormControl(this.invoice.description, [Validators.required]),
-      itemList: new FormArray(itemList!)
+      this.formGroup = new FormGroup({
+        fromStreetAddress:new FormControl(data.clientAddress.street, [Validators.required]),
+        fromCity:new FormControl(data.clientAddress.city, [Validators.required]),
+        fromPostCode:new FormControl(data.clientAddress.postCode, [Validators.required]),
+        fromCountry:new FormControl(data.clientAddress.country, [Validators.required]),
+        clientName:new FormControl(data.clientName, [Validators.required]),
+        clientEmail:new FormControl(data.clientEmail, [Validators.required, Validators.email]),
+        toStreetAddress:new FormControl(data.senderAddress.street, [Validators.required]),
+        toCity:new FormControl(data.senderAddress.city, [Validators.required]),
+        toPostCode:new FormControl(data.senderAddress.postCode, [Validators.required]),
+        toCountry:new FormControl(data.senderAddress.country, [Validators.required]),
+        projectDescription:new FormControl(data.description, [Validators.required]),
+        itemList: new FormArray(itemList!)
+      })
     })
   }
   get itemListFormGroups () {

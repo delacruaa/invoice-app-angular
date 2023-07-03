@@ -15,6 +15,8 @@ export class InvoicePageComponent implements OnInit {
   invoice:InvoiceInterface = {} as InvoiceInterface
   id:string=''
   isOpenSidebar=false
+  loading =false
+  error=false
   constructor(
     private route: ActivatedRoute, 
     private invoiceService:InvoiceService,
@@ -22,15 +24,22 @@ export class InvoicePageComponent implements OnInit {
     private router: Router,
     private _toastService: ToastService) {}
   ngOnInit(): void {
+    this.loading=true
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.id =  params['id']
-      this.invoiceService.getInvoice().subscribe(data=> {
+      this.invoiceService.getInvoiceList().subscribe(data=> {
+        console.log(id)
         data.forEach(item=> {
           if(item.id ==id) {
             this.invoice=item
+            this.invoiceService.invoiceItem.next(item)
           }
         })
+        this.loading=false
+      }, (error)=> {
+        this.loading=false
+        this.error=true
       })
     });
     this.sidebarService.editInvoice.subscribe(sidebar=> {

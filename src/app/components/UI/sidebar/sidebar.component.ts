@@ -10,7 +10,7 @@ export class SidebarComponent {
   @Input() isOpenSidebar=false
   @Input() sidebarName!:string
   constructor(private sidebarService:SidebarService) {}
-
+  
   closeSidebar() {
     this.sidebarService.closeSidebar(this.sidebarName)
   }

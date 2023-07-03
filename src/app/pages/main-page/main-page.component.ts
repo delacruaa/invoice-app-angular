@@ -25,7 +25,6 @@ export class MainPageComponent implements OnInit {
       this.filterArr=item
     })
     this.invoiceService.getInvoiceList().subscribe(invoiceList=> {
-      this.invoiceService.invoiceList.next(invoiceList)
       this.filterService.filterArr.subscribe(item=> {
         this.activeFilters = item.filter(filter => filter.isActive);
         if (this.activeFilters.length === 0 || this.activeFilters.length === item.length) {
