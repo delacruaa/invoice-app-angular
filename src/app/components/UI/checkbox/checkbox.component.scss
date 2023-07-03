@@ -1,0 +1,44 @@
+.wrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: var(--background-color);
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--border-color);
+    }
+    .checkbox__active {
+        @extend .checkbox;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--purple);
+        .icon {
+            margin-top: -5px;
+        }
+    }
+    .title {
+       
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        user-select: none;
+        font-size: 12px;
+        white-space: nowrap;
+        color:var(--title-color);
+    }
+
+    &:hover {
+        .checkbox {
+            border: 1px solid var(--purple);
+            
+        }
+        
+    }
+}

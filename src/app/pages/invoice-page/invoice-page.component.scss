@@ -1,0 +1,250 @@
+.invoice__wrapper {
+    padding-top: 100px;
+}
+.disable {
+    display: none;
+}
+.btn {
+    border: none;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 16px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color:var(--title-color);
+    
+    margin-bottom: 50px;
+    &:hover {
+        color:var(--dark-gray);  
+    }
+    .arrow {
+        transform: rotate(90deg);
+    }
+}
+.loading {
+    margin: 0 auto;
+}
+.error {
+    margin: 0 auto;
+    text-align: center;
+    color:car(--red)
+}
+.wrapper {
+    width: 100%;
+    .header__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--item-color);
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      
+        .status__wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            .status {
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: -.25px;
+                color: var(--subtitle-color);
+                font-weight: 300;
+            }
+        }
+        .button__wrapper {
+            display: flex;
+            gap: 10px;
+        }
+    }
+    .main__wrapper {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        background-color: var(--item-color);
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        .top__wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: -.25px;
+            color: var(--subtitle-color);
+            font-weight: 500;
+            
+            .id__wrapper {
+                .id {
+                    color: var(--title-color);
+                    font-size: 12px;
+                    line-height: 15px;
+                    letter-spacing: -.25px;
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                    span {
+                        color:var(--purple)
+                    }
+                }
+                
+            }
+            .address__wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+        .client__info__wrapper {
+            margin-top:50px;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: -.25px;
+            color: var(--subtitle-color);
+            font-weight: 500;
+            h2 {
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: -.8px;
+                color:var(--title-color);
+                margin-bottom: 8px;
+            }
+            p {
+                margin-bottom: 8px;
+            }
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .receipt {
+            margin-top: 20px;
+            width: 100%;
+            padding: 32px;
+            background: var(--header-color);
+            border-radius: 8px 8px 0 0;
+            table {
+                width: 100%;
+            }
+            thead {
+               
+                vertical-align: top;
+                text-align: end;
+            }
+            tbody {
+                text-align: end;
+            }
+            tr {
+                height: 44px;
+                td {
+                    font-size: 11px;
+                    line-height: 13px;
+                    letter-spacing: -.23px;
+                    color: var(--subtitle-color);
+                    font-weight: 700;
+                    &:first-child {
+                        text-align: start;
+                    }
+                }
+                .title {
+                    font-weight: 500;
+                }
+            }
+        }
+        .footer__wrapper {
+            width: 100%;
+            padding: 32px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--footer-color);
+            color: var(--white);
+            border-radius: 0 0 8px 8px;
+        }
+    }
+}
+.button__wrapper__mobile {
+    display: none;
+}
+.error {
+    display: flex;
+    padding-top: 50px;
+    width: 100%;
+    justify-content: center;
+}
+
+@media(max-width:630px) {
+    .wrapper {
+        .header__wrapper {
+            
+            
+        }
+        .main__wrapper {
+            padding: 32px 10px;
+        
+            .receipt {
+                padding: 32px 10px;
+            }
+            .footer__wrapper {
+                padding: 32px 10px;
+            }
+        }
+    }
+}
+
+@media(max-width:500px) {
+    .wrapper {
+        margin-bottom: 70px;
+        .header__wrapper {
+          
+            .button__wrapper {
+                display: none;
+            }
+            .status__wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        
+    }
+    .button__wrapper__mobile {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--item-color);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+    }
+} 
+@media(max-width:400px) {
+    .wrapper {
+       
+        .main__wrapper {
+
+        
+            .receipt {
+                overflow-x:scroll;
+                table {
+                    width: 400px;
+                    overflow-x:scroll
+                }
+                 
+            }
+            
+        }
+    }
+}

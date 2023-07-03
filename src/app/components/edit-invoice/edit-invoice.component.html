@@ -1,0 +1,145 @@
+<div class="wrapper">
+    <h1>Edit Invoice</h1>  
+    <form [formGroup] = "formGroup"  (ngSubmit)="submitForm()" >
+        <p class="form__name">Bill From</p>
+        <div class="input__wrapper">
+            <label>Street Address</label>   
+            <input [ngClass]="submitted &&  this.formGroup.get('fromStreetAddress')?.invalid? 'input__error' : 'input'" type="text"  formControlName="fromStreetAddress" >
+            <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('fromStreetAddress')?.invalid" >
+                <div class="error" *ngIf="this.formGroup.get('fromStreetAddress')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+            </div>
+        </div>
+        <div class="row__wrapper">
+            <div class="input__wrapper">
+                <label>City</label>   
+                <input [ngClass]="submitted &&  this.formGroup.get('fromCity')?.invalid? 'input__error' : 'input'" type="text"  formControlName="fromCity">
+                <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('fromCity')?.invalid" >
+                    <div class="error" *ngIf="this.formGroup.get('fromCity')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                </div>
+            </div>
+            <div class="input__wrapper">
+                <label>Post Code</label>   
+                <input [ngClass]="submitted &&  this.formGroup.get('fromPostCode')?.invalid? 'input__error' : 'input'" type="text"  formControlName="fromPostCode">
+                <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('fromPostCode')?.invalid" >
+                    <div class="error" *ngIf="this.formGroup.get('fromPostCode')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                </div>
+            </div>
+            <div class="input__wrapper">
+                <label>Country</label>   
+                <input [ngClass]="submitted &&  this.formGroup.get('fromCountry')?.invalid? 'input__error' : 'input'" type="text"  formControlName="fromCountry">
+                <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('fromPostCode')?.invalid" >
+                    <div class="error" *ngIf="this.formGroup.get('fromCountry')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                </div>
+            </div>
+        </div>
+        <p class="form__name">Bill From</p>
+        <div class="input__wrapper">
+            <label>Client's Name</label>   
+            <input [ngClass]="submitted &&  this.formGroup.get('clientName')?.invalid? 'input__error' : 'input'" type="text"  formControlName="clientName">
+            <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('clientName')?.invalid" >
+                <div class="error" *ngIf="this.formGroup.get('clientName')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+            </div>
+        </div>
+        <div class="input__wrapper">
+            <label>Client's Email</label>   
+            <input [ngClass]="submitted &&  this.formGroup.get('clientEmail')?.invalid? 'input__error' : 'input'" type="text"  formControlName="clientEmail">
+            <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('clientEmail')?.invalid" >
+                <div class="error" *ngIf="this.formGroup.get('clientEmail')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                <div class="error" *ngIf="this.formGroup.get('clientEmail')?.errors?.['email']"> <small>Invalid email format.</small> </div>
+            </div>
+        </div>
+        <div class="input__wrapper">
+            <label>Street Address</label>   
+            <input [ngClass]="submitted &&  this.formGroup.get('toStreetAddress')?.invalid? 'input__error' : 'input'" type="text"  formControlName="toStreetAddress" >
+            <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('toStreetAddress')?.invalid" >
+                <div class="error" *ngIf="this.formGroup.get('toStreetAddress')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+            </div>
+        </div>
+        <div class="row__wrapper">
+            <div class="input__wrapper">
+                <label>City</label>   
+                <input  [ngClass]="submitted &&  this.formGroup.get('toCity')?.invalid? 'input__error' : 'input'" type="text"  formControlName="toCity">
+                <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('toCity')?.invalid" >
+                    <div class="error" *ngIf="this.formGroup.get('toCity')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                </div>
+            </div>
+            <div class="input__wrapper">
+                <label>Post Code</label>   
+                <input [ngClass]="submitted &&  this.formGroup.get('toPostCode')?.invalid? 'input__error' : 'input'" type="text"  formControlName="toPostCode">
+                <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('toPostCode')?.invalid" >
+                    <div class="error" *ngIf="this.formGroup.get('toPostCode')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                </div>
+            </div>
+            <div class="input__wrapper">
+                <label>Country</label>   
+                <input [ngClass]="submitted &&  this.formGroup.get('toCountry')?.invalid? 'input__error' : 'input'" type="text"  formControlName="toCountry">
+                <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('toPostCode')?.invalid" >
+                    <div class="error" *ngIf="this.formGroup.get('toCountry')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+                </div>
+            </div>
+        </div>
+        <div class="input__wrapper">
+            <label>Invoice Date</label>   
+            <input [value]="currentMonth" disabled class="input payment__input disabled"  readonly type="text" >
+            <img class="icon calendar" src="/assets/icon-calendar.svg" alt="arrow">  
+        </div>
+        <div class="input__wrapper">
+            <label>Payment Terms</label>   
+            <input class="input payment__input" readonly type="text" [value]="currentSelect" (keydown)="onKeyDown($event)"  (click)="openDropdown(); $event.stopPropagation()">
+            <img class="icon" src="/assets/icon-arrow.svg" alt="arrow">
+            <app-select [contents]="selects" [currentContent]="currentSelect" (currentContentChanged)="currentContentChanged($event)"  [isDropdownOpen]="isSelectOpen" class="select"></app-select>
+        </div>
+        <div class="input__wrapper">
+            <label>Project Description</label>   
+            <input [ngClass]="submitted &&  this.formGroup.get('projectDescription')?.invalid? 'input__error' : 'input'" type="text"  formControlName="projectDescription">
+            <div class="error__wrapper" *ngIf="submitted &&  this.formGroup.get('toPostCode')?.invalid" >
+                <div class="error" *ngIf="this.formGroup.get('projectDescription')?.errors?.['required']" > <small>Cant be empty</small>  </div>
+            </div>
+        </div>
+
+        <p class="form__name ">Item List</p>
+        <div class="item__list" formArrayName="itemList">
+            <div class="row__wrapper" *ngFor="let item of itemListFormGroups.controls; let i =index" formGroupName="{{i}}">
+                <div class="input__wrapper">
+                    <label>Item Name</label>   
+                    <input formControlName="name" [ngClass]="submitted &&  itemListFormGroups.controls[i].get('name')?.invalid? 'input__error' : 'input'" type="text"  >
+                    <div class="error__wrapper left" *ngIf="submitted && itemListFormGroups.controls[i].get('name')?.invalid">
+                        <div class="error" *ngIf="itemListFormGroups.controls[i].get('name')?.errors?.['required']">
+                            <small>Cant be empty</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="input__wrapper">
+                    <label>Qty.</label>   
+                    <input formControlName="quantity" [ngClass]="submitted &&  itemListFormGroups.controls[i].get('quantity')?.invalid? 'input__error' : 'input'" type="number"  >
+                    <div class="error__wrapper left" *ngIf="submitted && itemListFormGroups.controls[i].get('quantity')?.invalid">
+                        <div class="error" *ngIf="itemListFormGroups.controls[i].get('quantity')?.errors?.['required']">
+                            <small>Cant be empty</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="input__wrapper">
+                    <label>Price</label>   
+                    <input formControlName="price" [ngClass]="submitted &&  itemListFormGroups.controls[i].get('price')?.invalid? 'input__error' : 'input'" type="number"  >
+                    <div class="error__wrapper left" *ngIf="submitted && itemListFormGroups.controls[i].get('price')?.invalid">
+                        <div class="error" *ngIf="itemListFormGroups.controls[i].get('price')?.errors?.['required']">
+                            <small>Cant be empty</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="input__wrapper">
+                    <label>Total</label>   
+                    <p class="total">{{itemListFormGroups.controls[i].get('price')?.value * itemListFormGroups.controls[i].get('quantity')?.value | number: '1.2-2' || '0.00' }}</p>
+                </div>
+                <button class="delete" *ngIf="itemListFormGroups.controls.length>1"(click)="removeItemList(i)" >
+                   <app-icon-trash></app-icon-trash>
+                </button>
+            </div>
+        </div>
+        <app-button [buttonClass]="'black__white'" (click)="addItemList()" [widthFull]="true">+ Add New Item</app-button>
+        <div class="btn">
+            <app-button [buttonClass]="'black__white'" (click)="closeSidebar()">Cancel</app-button>
+            <app-button [buttonClass]="'primary'" [type]="'submit'"  >Save changes</app-button>
+        </div>
+    </form>
+</div>

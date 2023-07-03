@@ -1,0 +1,6 @@
+<button  [ngClass]="widthFull? buttonClass+ ' '+ 'full': buttonClass" [type]="type"> 
+    <div *ngIf="buttonClass=='icon'"  class="plus__wrapper">
+        <img src="/assets/icon-plus.svg" class="plus" alt="plus" />
+    </div>
+    <ng-content></ng-content>
+</button>

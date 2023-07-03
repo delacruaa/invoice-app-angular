@@ -1,0 +1,39 @@
+<div class="container">
+    <app-spinner *ngIf="loading"></app-spinner>
+    <div class="error"  *ngIf="error">
+        Something get wrong... try later
+    </div>
+    <div *ngIf="!loading && !error" class="wrapper">
+        <div class="header__wrapper">
+            <div class="title__wrapper">
+                <h1 class="title">
+                    Invoices
+                </h1>
+                <p class="subtitle">
+                    There are 8 total invoices
+                </p>
+            </div>
+            <div class="button__wrapper">
+                <button class="btn" (click)="toggleDropdown(); $event.stopPropagation()">
+                    Filter by status
+                    <img src="/assets/icon-arrow.svg" alt="arrow" class="arrow" />
+                </button>
+                <app-button [buttonClass]="'icon'" (click)="openSidebar()">
+                    New Invoice
+                </app-button>
+            </div>
+            <div class="dropdown"  *ngIf="isOpenDropdown" (click)="$event.stopPropagation()">
+               <app-checkbox *ngFor="let filter of filterArr" [isActive]="filter.isActive" [title]="filter.title" (click)="handleCheckbox(filter.title)"  >
+                {{filter.title}}
+               </app-checkbox>
+            </div>
+        </div>
+        <div class="invoices__wrapper">
+           <app-invoice-item *ngFor="let invoice of invoiceList" [invoice]="invoice"></app-invoice-item>
+        </div>
+    </div>
+</div>
+
+<app-sidebar [isOpenSidebar]="isOpenSidebar" [sidebarName]="'addInvoice'">
+        <app-add-invoice></app-add-invoice>
+</app-sidebar>

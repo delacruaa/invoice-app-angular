@@ -1,0 +1,45 @@
+header {
+    width: 100%;
+    background-color: var(--light-dark);
+    height: 72px;
+    width: 100%;
+    position: fixed;
+    z-index: 4545;
+    .wrapper {
+        width:  100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 72px;
+        .logo__wrapper {
+            background-color: #7c5dfa;
+            width: 72px;
+            height:100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+        }
+        .user__wrapper {
+            display: flex;
+            height: 72px;
+            gap: 30px;
+            align-items: center;
+            .avatar {
+                min-width: 100px;
+                display: flex;
+                align-items: center;
+                position: relative;
+                justify-content: center;
+                height: 100%;
+                border-left: 1px solid #494e6e;
+                .user {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

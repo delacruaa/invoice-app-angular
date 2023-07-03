@@ -1,0 +1,10 @@
+<div class="wrapper" > 
+    <div [ngClass]="isActive? 'checkbox__active' : 'checkbox'">
+      <app-icon-check class="icon" *ngIf="isActive"></app-icon-check>
+     
+    </div>
+
+    <div class="title">
+       <ng-content></ng-content>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="wrapper"   [routerLink]="invoice.id">
+    <div class="created__at">
+        <p class="id">
+            <span>#</span>
+          {{invoice.id}}
+        </p>
+        <p class="date">Due {{invoice.createdAt | converDate }} </p> 
+    </div>
+    <p class="name">{{invoice.clientName}}</p>
+    <div class="price__wrapper">
+        <p class="price">
+            {{invoice.total | currency}}
+        </p>
+       <app-paid-status [status]="invoice.status"></app-paid-status>
+    </div>
+</div>

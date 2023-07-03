@@ -1,0 +1,57 @@
+.paid {
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -.25px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    min-width: 100px;
+    justify-content: center;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: rgba(51,214,159,.0571);
+    color: var(--green);
+    display: flex;
+    gap: 5px;
+    span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color:var(--green);
+    }
+}
+
+.draft {
+    @extend .paid;
+    background-color: var(--draft-color);
+    color: var(--title-color);
+    span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color:var(--title-color);
+    }
+}
+
+.pending {
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -.25px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    min-width: 100px;
+    justify-content: center;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: rgba(255,143,0,.0571);
+    color: var(--orange);
+    display: flex;
+    gap: 5px;
+    span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--orange);
+    }
+}

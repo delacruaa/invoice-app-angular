@@ -1,0 +1,10 @@
+<ul *ngIf="isDropdownOpen">
+    <li *ngFor="let content of contents"  (click)="editCurrentContent(content)">
+        <p  >{{content}}</p>
+        <app-icon-check *ngIf="content==currentContent" [fill]="'#7c5dfa'" ></app-icon-check>
+   
+    </li>
+   
+    
+    
+</ul>

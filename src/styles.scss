@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Spartan:100,200,300,regular,500,600,700,800,900');
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --purple: #7c5dfa;
+  --purple-hover: #9e89f1;
+  --red: #ec5757;
+  --red-hover: #f17171;
+  --light-gray: #f8f8fb;
+  --light-dark: #1e2139;
+  --dark-gray: #888eb0;
+  --gray:#7e88c3;
+  --dark: #141625;
+  --white: #FFFFFF;
+  --black: black;
+  --green: #33d69f;
+  --orange:#ff8f00;
+}
+
+body {
+  font-family: "Spartan", sans-serif;
+  font-weight: 700;
+  background: var(--background-color);
+}
+body[data-theme='light'] {
+  --background-color: var(--light-gray);
+  --title-color:var(--black);
+  --subtitle-color:var(--dark-gray);
+  --shadow:0 5px 10px rgba(72,84,159,.25);
+  --item-color: var(--white);
+  --button-color:var(--light-gray);
+  --draft-color:rgba(55,59,83,.0571);
+  --header-color:#f9fafe;
+  --footer-color:#373b53;  
+  --border-color:#dfe3fa;
+}
+body[data-theme='dark'] {
+  --background-color: var(--dark);
+  --title-color:var(--white);
+  --subtitle-color:var(--white);
+  --shadow:0 10px 20px rgba(0,0,0,.25);
+  --item-color: var(--light-dark);
+  --button-color:var(--dark);
+  --draft-color:rgba(223,227,250,.0571);
+  --border-color:#252945;
+  --header-color:#252945;
+  --footer-color:#0c0e16;
+}
+
+.container {
+  max-width: 750px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

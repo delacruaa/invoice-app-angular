@@ -1,0 +1,102 @@
+<div class="container">
+    <app-spinner *ngIf="loading"></app-spinner>
+    <div class="error"  *ngIf="error">
+        Something get wrong... try later
+    </div>
+    <div class="invoice__wrapper" *ngIf="!loading && !error"  > 
+        <button class="btn" [routerLink]="'/'">
+            <img src="/assets/icon-arrow.svg" alt="arrow" class="arrow" />
+            Go back
+        </button>
+        <div class="wrapper">
+            <div class="header__wrapper">
+                <div class="status__wrapper">
+                    <p class="status">
+                    Status
+                    </p>
+                    <app-paid-status [status]="invoice.status"></app-paid-status>
+                </div>
+                <div class="button__wrapper">
+                    <app-button  [buttonClass]="'black__white'" (click)="openSidebar()" >Edit</app-button>
+                    <app-button  [buttonClass]="'red'" (click)="deleteInvoice(invoice.id)" >Delete</app-button>
+                    <app-button (click)="markAsPaid(invoice.id)" *ngIf="invoice.status=='pending'" [buttonClass]="'primary'">Mark as Paid</app-button>
+                </div>
+            </div>
+            <div class="main__wrapper">
+                <div class="top__wrapper">
+                    <div class="id__wrapper">
+                        <p class="id">  <span>#</span>{{invoice.id}}</p>
+                        <p class="text">
+                        Re-branding
+                        </p>
+                    </div>
+                    <div class="address__wrapper">
+                        <p>{{invoice.senderAddress.street}}</p>
+                        <p>{{invoice.senderAddress.city}}</p>
+                        <p>{{invoice.senderAddress.postCode}}</p>
+                        <p>{{invoice.senderAddress.country}}</p>
+                    </div>
+                </div>
+                <div class="client__info__wrapper">
+                    <div class="date__wrapper">
+                        <div class="date">
+                            <p>Invoice Date</p>
+                            <h2>{{invoice.createdAt | converDate}}</h2>
+                        </div>
+                        <div class="date">
+                            <p>Payment Due</p>
+                            <h2>{{invoice.paymentDue | converDate}}</h2>
+                        </div>
+                    </div>
+                    <div class="bill__wrapper">
+                        <p>{{invoice.clientAddress.country}}</p>
+                        <h2>{{invoice.clientName}}</h2>
+                        <p>{{invoice.clientAddress.street}}</p>
+                        <p>{{invoice.clientAddress.city}}</p>
+                        <p>{{invoice.clientAddress.postCode}}</p>
+                        <p>{{invoice.clientAddress.country}}</p>
+                    </div>
+                    <div class="sent__wrapper">
+                        <p>Sent To</p>
+                        <h2>{{invoice.clientEmail}}</h2>
+                    </div>
+                </div>
+
+                <div class="receipt">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="title">Item Name</td>
+                                <td class="title">QTY.</td>
+                                <td class="title">Price</td>
+                                <td class="title">Total</td>
+                            </tr>
+                        </thead>
+                        <tbody  >
+                            <tr *ngFor="let item of invoice.items"  >
+                                <td >{{item.name}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.price | currency}}</td>
+                                <td>{{item.total | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="footer__wrapper">
+                    <p>Amount Due</p>
+                    <h2>{{invoice.total | currency}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="button__wrapper__mobile" >
+    <app-button  [buttonClass]="'black__white'" (click)="openSidebar()" >Edit</app-button>
+    <app-button  [buttonClass]="'red'" (click)="deleteInvoice(invoice.id)" >Delete</app-button>
+    <app-button (click)="markAsPaid(invoice.id)" *ngIf="invoice.status=='pending'" [buttonClass]="'primary'">Mark as Paid</app-button>
+</div>
+<app-sidebar  *ngIf="!loading && !error"  [isOpenSidebar]="isOpenSidebar" [sidebarName]="'editInvoice'">
+    <app-edit-invoice [invoice]="invoice"></app-edit-invoice>
+</app-sidebar>
+

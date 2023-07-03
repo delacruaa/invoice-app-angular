@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <div class="header">
+        <img class="arrow right" src="/assets/icon-arrow.svg" alt="arrow" (click)="previousMonth()">
+        <p>{{month | slice:2}}</p>
+        <img class="arrow left" src="/assets/icon-arrow.svg" alt="arrow" (click)="nextMonth()">
+    </div>
+    <div class="calendar">
+        <div *ngFor="let day of days" (click)="currentMonthChange(day)">
+            <p [ngClass]="day==currentMonth? 'active': 'not__active'"  >{{day | slice:0:2}}</p>
+        </div>
+        
+    </div>
+</div>

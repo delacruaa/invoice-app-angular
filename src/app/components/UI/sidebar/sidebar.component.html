@@ -1,0 +1,9 @@
+<div [ngClass]="isOpenSidebar? 'overlay': 'overlay__none' "  (click)="closeSidebar()">
+</div>
+<div [ngClass]="isOpenSidebar? 'wrapper__active': 'wrapper' ">
+    <button class="btn" (click)="closeSidebar()">
+        <img src="/assets/icon-arrow.svg" alt="arrow" class="arrow" />
+        Go back
+    </button>
+    <ng-content></ng-content>
+</div>
